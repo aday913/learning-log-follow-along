@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import django_heroku
-
+import os
 # Heroku settings
 if os.getcwd() == '/app':
     import dj_database_url
