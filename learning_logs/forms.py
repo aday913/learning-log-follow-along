@@ -1,6 +1,6 @@
 from socket import fromshare
 from django import forms
-from matplotlib import widgets
+# from matplotlib import widgets
 
 from .models import Topic, Entry
 
