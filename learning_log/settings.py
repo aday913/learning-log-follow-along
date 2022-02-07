@@ -15,6 +15,8 @@ from pathlib import Path
 # my settings
 LOGIN_URL = '/users/login'
 
+BOOTSRAP3 = {'include_jquery': True}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,6 +46,9 @@ INSTALLED_APPS = [
     # my apps
     'learning_logs',
     'users',
+
+    # third-party apps
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
