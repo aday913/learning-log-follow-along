@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
@@ -15,8 +17,10 @@ def topics(request):
     '''
     Show all the topics for the user
     '''
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    context = {'topics': topics}
+    topics1 = Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics2 = Topic.objects.filter(public=True)
+    topic_list = list(chain(topics1, topics2))
+    context = {'topics': topic_list}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
@@ -26,7 +30,7 @@ def topic(request, topic_id):
     '''
     topic = get_object_or_404(Topic, id=topic_id)
     # make sure the topic belongs to the current user
-    if topic.owner != request.user:
+    if topic.owner != request.user and not topic.public:
         raise Http404
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
