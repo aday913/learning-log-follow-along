@@ -24,7 +24,7 @@ def topic(request, topic_id):
     '''
     Show all entries for a topic
     '''
-    topic = Topic.objects.get_object_or_404(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     # make sure the topic belongs to the current user
     if topic.owner != request.user:
         raise Http404
@@ -74,7 +74,7 @@ def edit_entry(request, entry_id):
     '''
     Edit existing entry by entry id
     '''
-    entry = Entry.objects.get_object_or_404(id=entry_id)
+    entry = get_object_or_404(Entry, id=entry_id)
     topic = entry.topic
     if topic.owner != request.user:
         raise Http404
